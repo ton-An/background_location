@@ -1,3 +1,8 @@
+### 0.16.3
+- Updated flutter min version
+- Updated gradle versions
+- Updated flutter plugin binding [JoniJohn](https://github.com/JoniJohn/)
+
 ### 0.16.2
 - Updated android start on boot_complete trigger to ensure flutter engine is started
 
