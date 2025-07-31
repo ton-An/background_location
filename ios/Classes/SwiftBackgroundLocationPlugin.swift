@@ -78,6 +78,11 @@ public class SwiftBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLocationM
             SwiftBackgroundLocationPlugin.locationManager?.stopMonitoringSignificantLocationChanges()
             SwiftBackgroundLocationPlugin.locationManager?.stopUpdatingLocation()
             result(true)
+        } else if call.method == "update_distance_filter" {
+            let args = call.arguments as? [String: Any]
+            let distanceFilter = args?["distance_filter"] as? Double
+
+            SwiftBackgroundLocationPlugin.locationManager?.distanceFilter = distanceFilter ?? 0
         }
     }
     

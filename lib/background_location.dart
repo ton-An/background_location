@@ -163,6 +163,13 @@ class BackgroundLocation {
     locationCallbackStream?.stream.listen(location);
     return locationCallbackStream;
   }
+
+  static Future<void> updateDistanceFilter(double distanceFilter) async {
+    return await _channel
+        .invokeMethod('update_distance_filter', <String, dynamic>{
+      'distance_filter': distanceFilter,
+    });
+  }
 }
 
 /// about the user current location
