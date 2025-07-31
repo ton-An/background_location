@@ -1,8 +1,16 @@
 # Background Location
 
-## Forked from [Almoullim](https://github.com/Almoullim/background_location) and published separately due to slow maintenance and support
+> 🚧 Fork of
+> [background_location_2](https://pub.dev/packages/background_location_2) -
+> which adds features needed for Fernwaerts. An eventual release on pub.dev is
+> planned after the beta release of Fernwaerts and when Fernwaerts' tracking
+> logic is finalized and extracted to this package.
 
-A Flutter plugin to get location updates in the background for both Android and iOS (Requires iOS 10.0+). Uses `CoreLocation` for iOS and `FusedLocationProvider` for Android
+## 
+
+A Flutter plugin to get location updates in the background for both Android and
+iOS (Requires iOS 10.0+). Uses `CoreLocation` for iOS and
+`FusedLocationProvider` for Android
 
 ## Getting Started
 
@@ -19,11 +27,13 @@ dependencies:
 flutter pub get
 ```
 
-Alternatively, your editor might support flutter packages get. Check the docs for your editor to learn more.
+Alternatively, your editor might support flutter packages get. Check the docs
+for your editor to learn more.
 
 ## Configuration
 
-For using background_location package you need to add permissions to use location service. **Add** these permissions to your platform.
+For using background_location package you need to add permissions to use
+location service. **Add** these permissions to your platform.
 
 ### iOS Platform Permission
 
@@ -43,7 +53,11 @@ in `ios/Runner/Info.plist` add:
 </array>
 ```
 
-> *Note*: You need to describe your purpose for using the permission in to `string` value. If not, attempts to access the resource fail, and might even cause your app to crash. And when publishing to the App Store, this can cause your app to be rejected by Apple. Refer to [Provide a purpose string (Apple Documentation)](https://developer.apple.com/documentation/uikit/protecting_the_user_s_privacy/requesting_access_to_protected_resources#3037322).
+> _Note_: You need to describe your purpose for using the permission in to
+> `string` value. If not, attempts to access the resource fail, and might even
+> cause your app to crash. And when publishing to the App Store, this can cause
+> your app to be rejected by Apple. Refer to
+> [Provide a purpose string (Apple Documentation)](https://developer.apple.com/documentation/uikit/protecting_the_user_s_privacy/requesting_access_to_protected_resources#3037322).
 
 ### Android Platform Permission
 
@@ -54,7 +68,7 @@ In `android/app/src/main/AndroidManifest.xml` add:
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/> 
+<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
 ```
 
 ## How to use
@@ -65,9 +79,12 @@ Import the package where you want to use it.
 import 'package:background_location_2/background_location.dart';
 ```
 
-Request permissions from the user. You can use [permission_handler](https://pub.dev/packages/permission_handler) for this.
+Request permissions from the user. You can use
+[permission_handler](https://pub.dev/packages/permission_handler) for this.
 
-Set the notification title, message and icon **(Android only)**. Use `await` or `.then` if you want to start the location service immediately after because it's an asynchronous method
+Set the notification title, message and icon **(Android only)**. Use `await` or
+`.then` if you want to start the location service immediately after because it's
+an asynchronous method
 
 ```dart
 BackgroundLocation.setAndroidNotification(
@@ -77,13 +94,16 @@ BackgroundLocation.setAndroidNotification(
 );
 ```
 
-Set the interval between localisations in milliseconds **(Android only)**. Use `await` or `.then` if you want to start the location service immediately after because it's an asynchronous method
+Set the interval between localisations in milliseconds **(Android only)**. Use
+`await` or `.then` if you want to start the location service immediately after
+because it's an asynchronous method
 
 ```dart
 BackgroundLocation.setAndroidConfiguration(1000);
 ```
 
-Start the location service. This will also ask the user for permission if not asked previously by another package.
+Start the location service. This will also ask the user for permission if not
+asked previously by another package.
 
 ```dart
 // To ensure that previously started services have been stopped, if desired
@@ -93,21 +113,32 @@ BackgroundLocation.stopLocationService();
 BackgroundLocation.startLocationService();
 ```
 
-> *Note:* There is currently an open issue (#10) where, if the location service is started multiple times, the location callback will get called repeatedly. This can be worked around by calling BackgroundLocation.stopLocationService(); to stop any previous running services (such as from a previous run of the app) before starting a new one.
+> _Note:_ There is currently an open issue (#10) where, if the location service
+> is started multiple times, the location callback will get called repeatedly.
+> This can be worked around by calling BackgroundLocation.stopLocationService();
+> to stop any previous running services (such as from a previous run of the app)
+> before starting a new one.
 
-Start location service by specifying `distanceFilter`. Defaults to `0` if not specified
+Start location service by specifying `distanceFilter`. Defaults to `0` if not
+specified
 
 ```dart
 BackgroundLocation.startLocationService(distanceFilter : 10);
 ```
 
-You can also force the use of Android `LocationManager` instead of Google's `FusedLocationProvider` by setting the `forceAndroidLocationManager` property to `true`. If not specified, this defaults to `false`, which uses `FusedLocationProvider` if it is available, treating `LocationManager` as a fallback. This setting has no effect on iOS devices.
+You can also force the use of Android `LocationManager` instead of Google's
+`FusedLocationProvider` by setting the `forceAndroidLocationManager` property to
+`true`. If not specified, this defaults to `false`, which uses
+`FusedLocationProvider` if it is available, treating `LocationManager` as a
+fallback. This setting has no effect on iOS devices.
 
 ```dart
 BackgroundLocation.startLocationService(forceAndroidLocationManager: true);
 ```
 
-`getLocationUpdates` will trigger whenever the location is updated on the device. Provide a callback function to `getLocationUpdates` to handle location updates.
+`getLocationUpdates` will trigger whenever the location is updated on the
+device. Provide a callback function to `getLocationUpdates` to handle location
+updates.
 
 ```dart
 BackgroundLocation.getLocationUpdates((location) {
