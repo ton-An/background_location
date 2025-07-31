@@ -87,17 +87,21 @@ public class SwiftBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLocationM
         }
     }
     
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = [
+        let location =
+            [
             "speed": locations.last!.speed,
+                "speed_accuracy": locations.last!.speedAccuracy,
             "altitude": locations.last!.altitude,
+                "ellipsoidal_altitude": locations.last!.ellipsoidalAltitude,
+                "altitude_accuracy": locations.last!.verticalAccuracy,
             "latitude": locations.last!.coordinate.latitude,
             "longitude": locations.last!.coordinate.longitude,
             "accuracy": locations.last!.horizontalAccuracy,
             "bearing": locations.last!.course,
+                "bearing_accuracy": locations.last!.courseAccuracy,
             "time": locations.last!.timestamp.timeIntervalSince1970 * 1000,
-            "is_mock": false
-        ] as [String : Any]
+                "is_mock": false,
+            ] as [String: Any]
 
         SwiftBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: location)
     }

@@ -169,33 +169,46 @@ class BackgroundLocation {
 class Location {
   double latitude;
   double longitude;
-  double altitude;
-  double bearing;
   double accuracy;
+  double altitude;
+  double ellipsoidalAltitude;
+  double altitudeAccuracy;
+  double bearing;
+  double bearingAccuracy;
   double speed;
+  double speedAccuracy;
   double time;
   bool isMock;
 
   Location({
     required this.longitude,
     required this.latitude,
-    required this.altitude,
     required this.accuracy,
+    required this.altitude,
+    required this.ellipsoidalAltitude,
+    required this.altitudeAccuracy,
     required this.bearing,
+    required this.bearingAccuracy,
     required this.speed,
+    required this.speedAccuracy,
     required this.time,
     required this.isMock,
   });
 
   factory Location.fromJson(Map<dynamic, dynamic> json) {
-    bool isLocationMocked = Platform.isAndroid ? json['is_mock'] as bool : false;
+    bool isLocationMocked =
+        Platform.isAndroid ? json['is_mock'] as bool : false;
     return Location(
       latitude: json['latitude'] as double,
       longitude: json['longitude'] as double,
-      altitude: json['altitude'] as double,
-      bearing: json['bearing'] as double,
       accuracy: json['accuracy'] as double,
+      altitude: json['altitude'] as double,
+      ellipsoidalAltitude: json['ellipsoidal_altitude'] as double,
+      altitudeAccuracy: json['altitude_accuracy'] as double,
+      bearing: json['bearing'] as double,
+      bearingAccuracy: json['bearing_accuracy'] as double,
       speed: json['speed'] as double,
+      speedAccuracy: json['speed_accuracy'] as double,
       time: json['time'] as double,
       isMock: isLocationMocked,
     );
@@ -205,12 +218,16 @@ class Location {
     var obj = {
       'latitude': latitude,
       'longitude': longitude,
-      'altitude': altitude,
-      'bearing': bearing,
       'accuracy': accuracy,
+      'altitude': altitude,
+      "ellipsoidal_altitude": ellipsoidalAltitude,
+      "altitude_accuracy": altitudeAccuracy,
+      'bearing': bearing,
+      "bearing_accuracy": bearingAccuracy,
       'speed': speed,
+      "speed_accuracy": speedAccuracy,
       'time': time,
-      'is_mock': isMock
+      'is_mock': isMock,
     };
     return obj;
   }
