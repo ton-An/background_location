@@ -16,6 +16,6 @@ Flutter background location plugin for Android and iOS
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.swift_version = '4.2'
-  s.ios.deployment_target = '12.0'
+  s.ios.deployment_target = '15.0'
 end
 
